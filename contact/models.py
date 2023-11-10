@@ -13,7 +13,7 @@ class Contact(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50, blank=True)
     phone = models.CharField(max_length=50)
-    email = models.EmailField(max_length=50)
+    email = models.EmailField(max_length=50, blank=True)
     # pega a data no momento em que um contato é criado:
     created_date = models.DateTimeField(default=timezone.now)
     description = models.TextField(blank=True)
