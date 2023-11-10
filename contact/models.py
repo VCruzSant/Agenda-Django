@@ -17,3 +17,7 @@ class Contact(models.Model):
     # pega a data no momento em que um contato é criado:
     created_date = models.DateTimeField(default=timezone.now)
     description = models.TextField(blank=True)
+
+    # Com isso, consigo alterar o contact name que é exibido
+    def __str__(self) -> str:
+        return f'{self.first_name} {self.last_name}'
