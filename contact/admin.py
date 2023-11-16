@@ -1,10 +1,10 @@
 from django.contrib import admin
-from contact.models import Contact
+from contact import models
 
 # Register your models here.
 
 
-@admin.register(Contact)
+@admin.register(models.Contact)
 class ContactAdmin(admin.ModelAdmin):
     # exibe os fields registados no model
     list_display = (
@@ -22,3 +22,11 @@ class ContactAdmin(admin.ModelAdmin):
     list_max_show_all = 100
     # linka os inputs com seus respectivos registros
     list_display_links = 'id', 'phone',
+
+
+@admin.register(models.Category)
+class CategoryAdmin(admin.ModelAdmin):
+    # exibe os fields registados no model
+    list_display = ('name',)
+    # configura a ordenação
+    ordering = ('-id',)

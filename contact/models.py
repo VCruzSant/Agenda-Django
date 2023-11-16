@@ -6,6 +6,14 @@ from django.utils import timezone
 # model gerencia as migrations
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=50)
+
+    # Com isso, consigo alterar o contact name que é exibido
+    def __str__(self) -> str:
+        return self.name
+
+
 class Contact(models.Model):
     # Field -> campos
     # CharField -> campo que limita caracteres
@@ -20,6 +28,13 @@ class Contact(models.Model):
 
     show = models.BooleanField(default=True)
     picture = models.ImageField(blank=True, upload_to='pictures/%Y/%m')
+
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True
+    )
 
     # Com isso, consigo alterar o contact name que é exibido
     def __str__(self) -> str:
