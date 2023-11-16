@@ -4,6 +4,8 @@ chromedriver
 mysql_206
 .env
 static_files
+static/
+media/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
