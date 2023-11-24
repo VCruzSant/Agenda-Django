@@ -8,7 +8,8 @@ from contact import models
 class ContactAdmin(admin.ModelAdmin):
     # exibe os fields registados no model
     list_display = (
-        'id', 'first_name', 'last_name', 'phone', 'email', 'created_date',
+        'id', 'first_name', 'last_name',
+        'phone', 'email', 'created_date', 'show'
     )
     # configura a ordenação
     ordering = ('-id',)
@@ -22,6 +23,8 @@ class ContactAdmin(admin.ModelAdmin):
     list_max_show_all = 100
     # linka os inputs com seus respectivos registros
     list_display_links = 'id', 'phone',
+    # permite eu editar vários contatos
+    list_editable = 'first_name', 'last_name', 'show'
 
 
 @admin.register(models.Category)

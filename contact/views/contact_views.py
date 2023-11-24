@@ -4,7 +4,12 @@ from contact.models import Contact
 
 
 def index(request):
-    contacts = Contact.objects.all()
+    contacts = Contact.objects \
+        .filter(show=True)\
+        .order_by('-id')
+
+    # imprime, no console, a query que está sendo executada:
+    print(contacts.query)
 
     context = {
         'contacts': contacts
