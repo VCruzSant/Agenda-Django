@@ -38,32 +38,27 @@ class ContactForm(forms.ModelForm):
         #         }
         #     )
         # }
-
+    # usada para validação geral dos fields:
     def clean(self):
-        # cleaned_data = self.cleaned_data
+        first_name = self.cleaned_data.get('first_name')
+        last_name = self.cleaned_data.get('last_name')
 
-        self.add_error(
-            'first_name',
-            ValidationError(
-                'Menssage Error',
+        if first_name == last_name:
+            raise ValidationError(
+                'Second name cannot be the same as first name',
                 code='invalid'
             )
-        )
-
-        self.add_error(
-            'last_name',
-            ValidationError(
-                'Menssage Error',
-                code='invalid'
-            )
-        )
-
-        self.add_error(
-            'phone',
-            ValidationError(
-                'Menssage Error',
-                code='invalid'
-            )
-        )
 
         return super().clean()
+
+    # usada para validação de um field específico
+    def clean_first_name(self):
+        first_name = self.cleaned_data.get('first_name')
+
+        if first_name == 'abc':
+            raise ValidationError(
+                'Digite um nome verdadeiro',
+                code='invalid'
+            )
+
+        return first_name
