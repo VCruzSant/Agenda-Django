@@ -11,8 +11,6 @@ from contact.forms import ContactForm
 
 def create(request):
     if request.method == 'POST':
-        print(request.POST.get('first_name'))
-        print(request.POST.get('last_name'))
 
         context = {
             'form': ContactForm(request.POST)
