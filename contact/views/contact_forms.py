@@ -26,6 +26,22 @@ class ContactForm(forms.ModelForm):
             )
         )
 
+        self.add_error(
+            'last_name',
+            ValidationError(
+                'Menssage Error',
+                code='invalid'
+            )
+        )
+
+        self.add_error(
+            'phone',
+            ValidationError(
+                'Menssage Error',
+                code='invalid'
+            )
+        )
+
         return super().clean()
 
 # request.method GET -> requisição apenas para acessar a página
