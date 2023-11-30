@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from contact.forms import ContactForm
 # Create your views here.
@@ -11,10 +11,19 @@ from contact.forms import ContactForm
 
 def create(request):
     if request.method == 'POST':
-
+        form = ContactForm(request.POST)
         context = {
-            'form': ContactForm(request.POST)
+            'form': form
         }
+
+        # se o formulário for valido-> salve na base de dados
+        # .save() é a função do django
+        if form.is_valid():
+            # se eu quiser mudar alguma informação, eu impeço o commit
+            # contact = form.save(commit=False)
+            # contact.save()
+            form.save()
+            return redirect('contact:contact')
 
         return render(
             request,
