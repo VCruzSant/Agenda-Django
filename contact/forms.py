@@ -25,10 +25,18 @@ class ContactForm(forms.ModelForm):
         )
 
     class Meta:
+        picture = forms.ImageField(
+            widget=forms.FileInput(
+                attrs={
+                    'accept': 'image/*'
+                }
+            )
+        )
         model = Contact
         fields = (
             'first_name', 'last_name', 'phone',
             'email', 'description', 'category',
+            'picture'
         )
 
         # crio widgets:

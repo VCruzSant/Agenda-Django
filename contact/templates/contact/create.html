@@ -10,14 +10,13 @@
       {% for field in form %}
       <div class="form-group">
         <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-        {{ field }} 
-        {{ field.errors }}
-
-        {% if field.help_text %}
-          <p class="help-text">{{field.help_text}}</p>
+        {{ field }} {{ field.errors }} {% if field.help_text %}
+        <p class="help-text">{{field.help_text}}</p>
         {% endif %}
       </div>
-      {% endfor %}
+      {% if field.name == 'picture' and field.value.url %}
+      <img src="{{ field.value.url }}" alt="" />
+      {% endif %} {% endfor %}
     </div>
 
     {% if form.non_field_errors %}
