@@ -13,9 +13,11 @@
 
   <p><img src="{{contact.picture.url}}" alt="{{ contact.first_name }} {{ contact.last_name }}"></p>
 
+  {% if user == contact.owner %}
   <div class="contact-links">
     <a href="{% url "contact:update" contact.id %}" class="btn btn-link">Update</a>
-
+  {% endif %}
+  
     <form action="{% url "contact:delete" contact.id %}" method="POST">
       {% csrf_token %}
       {% if confirmation == 'no' %}
