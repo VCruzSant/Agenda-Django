@@ -12,6 +12,7 @@ from contact.models import Contact
 # lógica: se for GET -> Apenas renderiza a page
 
 
+@login_required(login_url='contact:login')
 def create(request):
     form_action = reverse('contact:create')
 
@@ -55,6 +56,7 @@ def create(request):
     )
 
 
+@login_required(login_url='contact:login')
 def update(request, contact_id):
     # ou pega os dados dos contatos, id e que esteja com show
     # ou retorne 404
@@ -104,6 +106,7 @@ def update(request, contact_id):
     )
 
 
+@login_required(login_url='contact:login')
 def delete(request, contact_id):
     contact = get_object_or_404(Contact, pk=contact_id, show=True)
     # Na requisição, pegue o valor confirmation
