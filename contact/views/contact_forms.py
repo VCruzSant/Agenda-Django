@@ -33,7 +33,9 @@ def create(request):
 
             # dessa forma eu consigo passar o que foi salvo
             # assim eu extraio o contact.pk -> primory key que é o ID
-            contact = form.save()
+            contact = form.save(commit=False)
+            contact.owner = request.user
+            contact.save()
             return redirect('contact:update', contact_id=contact.pk)
 
         return render(
@@ -60,7 +62,9 @@ def create(request):
 def update(request, contact_id):
     # ou pega os dados dos contatos, id e que esteja com show
     # ou retorne 404
-    contact = get_object_or_404(Contact, pk=contact_id, show=True)
+    contact = get_object_or_404(
+        Contact, pk=contact_id, show=True, owner=request.user
+    )
 
     # redireciona pra página de update com o id do contato
     form_action = reverse('contact:update', args=(contact_id,))
@@ -108,7 +112,9 @@ def update(request, contact_id):
 
 @login_required(login_url='contact:login')
 def delete(request, contact_id):
-    contact = get_object_or_404(Contact, pk=contact_id, show=True)
+    contact = get_object_or_404(
+        Contact, pk=contact_id, show=True, owner=request.user
+    )
     # Na requisição, pegue o valor confirmation
     # e se não tiver valor, confirmation vai ser no
     confirmation = request.POST.get('confirmation', 'no')
