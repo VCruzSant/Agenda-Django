@@ -1,4 +1,5 @@
-# type:ignore
+# flake8: noqa
+# type: ignore
 """
 Django settings for project project.
 
