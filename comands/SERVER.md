@@ -88,8 +88,7 @@ git pull agendarepo main
 ## Configurando o Postgresql
 
 ```
-
-
+sudo -u postgres psql
 
 postgres=# create role usuario_agenda with login superuser createdb createrole password 'senha_usuario_agenda';
 CREATE ROLE
